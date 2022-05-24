@@ -1,0 +1,16 @@
+singleQuote: true
+trailingComma: 'es5'
+printWidth: 140
+bracketSpacing: true
+endOfLine: 'auto'
+arrowParens: 'avoid'
+tabWidth: 2
+overrides:
+  - files: '*.html'
+    options:
+      parser: 'html'
+      tabWidth: 2
+  - files: '*.component.html'
+    options:
+      parser: 'angular'
+      tabWidth: 2
