@@ -1,6 +1,7 @@
 import React from 'react';
 import untar from 'js-untar';
 import Pako from 'pako';
+import RepoParser from '../shared/repo-parser';
 
 class PackageList extends React.Component {
   constructor(props) {
@@ -15,8 +16,9 @@ class PackageList extends React.Component {
         const byteArray = Pako.inflate(buff);
         return untar(byteArray.buffer).progress(extractedFile => {
           if (extractedFile.name.endsWith('desc')) {
+            const descr = RepoParser.parse(extractedFile.readAsString());
             this.setState(prevState => ({
-              files: [...prevState.files, extractedFile],
+              files: [...prevState.files, descr],
             }));
           }
         });
@@ -32,11 +34,29 @@ class PackageList extends React.Component {
 
   render() {
     return (
-      <ul>
-        {this.state.files.map((item, index) => (
-          <li key={index}>{item.name}</li>
-        ))}
-      </ul>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Version</th>
+            <th scope="col">Arch</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.files.map((item, index) => (
+            <tr key={index}>
+              <th scope="row">1</th>
+              <td>{item.name}</td>
+              <td>
+                <span class="badge badge-secondary">New</span>
+                <span className="badge badge-danger">{item.version}</span>
+              </td>
+              <td>{item.arch}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     );
   }
 }
