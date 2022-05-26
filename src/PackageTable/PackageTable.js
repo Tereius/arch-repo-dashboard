@@ -33,6 +33,7 @@ export function PackageTable(props) {
       {
         Header: 'Arch',
         accessor: 'arch',
+        Cell: ({ row }) => <span className="badge badge-pill badge-secondary">{row.original.arch}</span>,
       },
     ],
     []
