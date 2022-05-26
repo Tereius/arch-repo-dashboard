@@ -10,24 +10,26 @@ class PackageList extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://tereius.github.io/arch-repo/x86_64/tereius.files.tar.gz')
+    fetch('./community.db.tar.gz')
       .then(res => res.arrayBuffer())
-      .then(x => new Promise(resolve => setTimeout(() => resolve(x), 1000)))
+      //.then(x => new Promise(resolve => setTimeout(() => resolve(x), 1000)))
       .then(buff => {
         const byteArray = Pako.inflate(buff);
         return untar(byteArray.buffer).progress(extractedFile => {
           if (extractedFile.name.endsWith('desc')) {
             const descr = RepoParser.parse(extractedFile.readAsString());
-            this.setState(prevState => ({
-              files: [...prevState.files, descr],
-            }));
+            //this.setState(prevState => ({
+            //  files: [...prevState.files, descr],
+            //}));
           }
         });
       })
       .then(extractedFiles => {
         // onSuccess
         console.info('finished');
+        const files = extractedFiles.filter(file => file.name.endsWith('desc')).map(file => RepoParser.parse(file.readAsString()));
         this.setState(() => ({
+          files: files,
           loading: false,
         }));
       })
@@ -43,7 +45,11 @@ class PackageList extends React.Component {
     const isLoading = this.state.loading;
 
     if (isLoading) {
-      return <div>Loading</div>;
+      return (
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      );
     } else {
       return (
         <table className="table">
@@ -52,7 +58,9 @@ class PackageList extends React.Component {
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Version</th>
+              <th scope="col">Revision</th>
               <th scope="col">Arch</th>
+              <th scope="col">Description</th>
             </tr>
           </thead>
           <tbody>
@@ -61,10 +69,13 @@ class PackageList extends React.Component {
                 <th scope="row">1</th>
                 <td>{item.name}</td>
                 <td>
-                  <span className="badge badge-secondary">New</span>
                   <span className="badge badge-danger">{item.version}</span>
                 </td>
+                <td>
+                  <span className="badge badge-secondary">3</span>
+                </td>
                 <td>{item.arch}</td>
+                <td>{item.desc}</td>
               </tr>
             ))}
           </tbody>
