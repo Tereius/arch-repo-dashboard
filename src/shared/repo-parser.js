@@ -20,6 +20,11 @@ class RepoParser {
             break;
           case '%VERSION%':
             ret.version = line;
+            const split = line.split('-');
+            if (split.length >= 2) {
+              ret.versionWoRev = split[0];
+              ret.rev = split[1];
+            }
             break;
           case '%DESC%':
             ret.desc = line;
@@ -46,7 +51,7 @@ class RepoParser {
             ret.arch = line;
             break;
           case '%BUILDDATE%':
-            ret.builddate = line;
+            ret.builddate = new Date(parseInt(line) * 1000).toLocaleDateString();
             break;
           case '%PACKAGER%':
             ret.packager = line;
