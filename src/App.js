@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react';
+import { Search } from './Search/Search';
 import { BrowserRouter, Route, Routes, Link, Outlet } from 'react-router-dom';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
         <div className="container-fluid">
           <Link to="/">Home</Link>
           <Link to="/packages">Packages</Link>
+          <Search />
           <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
             <button className="btn btn-outline-success" type="submit">
