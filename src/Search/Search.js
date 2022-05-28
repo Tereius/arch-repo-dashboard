@@ -8,6 +8,7 @@ export function Search() {
   const data = useRepoDb();
   const [searchText, setSearchText] = useState('');
   const [show, setShow] = React.useState(false);
+  const [proposedShow, setProposedShow] = React.useState(false);
   const [focused, setFocused] = React.useState(false);
   const [searchResult, setSearchResult] = useState([]);
 
@@ -32,20 +33,29 @@ export function Search() {
 
   useEffect(() => {
     if (searchResult.length > 0) {
-      setShow(focused);
+      setShow(proposedShow);
     } else {
       setShow(false);
     }
-  }, [searchResult, focused]);
+  }, [searchResult, focused, proposedShow]);
 
   const inputRef = useRef();
   const onSelected = (key, event) => {
     inputRef.current.blur();
   };
 
+  const onToggle = (nextShow, meta) => {
+    //console.warn('proposed show ' + nextShow + ' cause ' + meta.source);
+    if ((meta.source === 'rootClose' || meta.source === 'click') && nextShow === false) {
+      setProposedShow(focused);
+    } else {
+      setProposedShow(nextShow);
+    }
+  };
+
   return (
     <>
-      <Dropdown autoClose="true" onSelect={onSelected} show={show}>
+      <Dropdown autoClose="true" focusFirstItemOnShow="keyboard" onSelect={onSelected} onToggle={onToggle} show={show}>
         <Dropdown.Toggle as={'form'} split={true} bsPrefix="ignore">
           <input
             className="form-control me-2"
