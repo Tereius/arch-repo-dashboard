@@ -1,8 +1,10 @@
 import Fuse from 'fuse.js';
 import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { useRepoDb } from '../hooks/useRepoDb';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, Form, FormControl, InputGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 export function Search() {
   const data = useRepoDb();
@@ -56,17 +58,22 @@ export function Search() {
   return (
     <>
       <Dropdown autoClose="true" focusFirstItemOnShow="keyboard" onSelect={onSelected} onToggle={onToggle} show={show}>
-        <Dropdown.Toggle as={'form'} split={true} bsPrefix="ignore">
-          <input
-            className="form-control me-2"
-            type="search"
+        <Dropdown.Toggle as={'Form'} split={true} bsPrefix="ignore">
+          <InputGroup
+            hasValidation
+            className="me-2"
             onFocus={onFocus}
             onBlur={onBlur}
             placeholder="Search"
             aria-label="Search"
             onChange={event => setSearchText(event.target.value)}
             ref={inputRef}
-          />
+          >
+            <FormControl type="text" placeholder="Search packages" required isInvalid />
+            <span className="input-group-addon">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </span>
+          </InputGroup>
         </Dropdown.Toggle>
         <Dropdown.Menu>
           {searchResult.map(item => (
