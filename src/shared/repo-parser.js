@@ -62,8 +62,30 @@ class RepoParser {
           case '%MAKEDEPENDS%':
             ret.makedepends = line;
             break;
+          case '%PROVIDES%':
+            ret.provides = line;
+            break;
+          case '%CONFLICTS%':
+            ret.conflicts = line;
+            break;
+          case '%REPLACES%':
+            ret.replaces = line;
+            break;
+          case '%OPTDEPENDS%':
+            ret.replaces = line;
+            break;
+          case '%CHECKDEPENDS%':
+            ret.replaces = line;
+            break;
+          case '%GROUPS%':
+            ret.groups = line;
+            break;
+          case '%PGPSIG%':
+            ret.pgpsig = line;
+            break;
           default:
             // nothing to do
+            console.info('Skipping: ' + mode);
             break;
         }
       }

@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PackageTable } from './PackageTable/PackageTable';
 import { PackagePage } from './PackagePage/PackagePage';
+import { LandingPage } from './Landing/LandingPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +14,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
+          <Route path="/" element={<LandingPage />} />
           <Route path="packages/" element={<PackageTable />} />
           <Route path="package/:packageName" element={<PackagePage />} />
           <Route path="*" element={<p>Not found</p>} />
