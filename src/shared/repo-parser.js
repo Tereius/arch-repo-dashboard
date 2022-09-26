@@ -72,10 +72,10 @@ class RepoParser {
             ret.replaces = line;
             break;
           case '%OPTDEPENDS%':
-            ret.replaces = line;
+            ret.optdepends = line;
             break;
           case '%CHECKDEPENDS%':
-            ret.replaces = line;
+            ret.checkdepends = line;
             break;
           case '%GROUPS%':
             ret.groups = line;
