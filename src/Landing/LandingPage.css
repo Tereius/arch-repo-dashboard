@@ -1,0 +1,30 @@
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+  }
+
+  .box img {
+    width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .box .box-child {
+    width: 40rem;
+  }
+
+  .buttonIn {
+    position: relative;
+}
+
+.buttonIn button {
+    position: absolute;
+    right: 0.3rem;
+    top: 0.3rem;
+}
+
+.buttonIn textarea {
+  font-family: monospace;
+}
