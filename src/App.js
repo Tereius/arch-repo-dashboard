@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import { Search } from './Search/Search';
@@ -10,7 +9,7 @@ function App() {
       <nav className="navbar bg-light">
         <div className="container-fluid">
           <Link to="/">
-            <img src="/logo192.png" width="30" height="30" alt="Home" />
+            <img src="/logo.svg" width="30" height="30" alt="Home" />
           </Link>
           <Link to="/packages">Packages</Link>
           <Search />

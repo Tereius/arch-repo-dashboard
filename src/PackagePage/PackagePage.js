@@ -3,6 +3,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import { useParams, Link } from 'react-router-dom';
 import { useRepoDb } from '../hooks/useRepoDb';
 import { VersionBadge } from '../VersionBadge/VersionBadge';
+import { TextAreaCopyable } from '../TextAreaCopyable/TextAreaCopyable';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -41,8 +42,24 @@ export function PackagePage() {
         <div className="card-header">
           <VersionBadge version={item.version} revision={item.rev} />
           <div className="card-body">
-            <h2 className="card-title">{item.name}</h2>
-            <p className="card-text">{item.desc}</p>
+            <Row>
+              <Col sm={8}>
+                <h2 className="card-title">{item.name}</h2>
+              </Col>
+              <Col sm={4}>
+                <TextAreaCopyable text={'pacman -S ' + item.name}></TextAreaCopyable>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={8}>
+                <p className="card-text">{item.desc}</p>
+              </Col>
+              <Col sm={4}>
+                <a href={'/' + item.filename} download>
+                  Download
+                </a>
+              </Col>
+            </Row>
           </div>
         </div>
       </div>
