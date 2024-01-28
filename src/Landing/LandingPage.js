@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { Card, OverlayTrigger, Tooltip, Form, Button } from 'react-bootstrap';
 import { TextAreaCopyable } from '../TextAreaCopyable/TextAreaCopyable';
+import { repoPathPart, repoName } from '../hooks/useRepoDb'
 import './LandingPage.css';
 
 export function LandingPage() {
@@ -12,10 +13,10 @@ export function LandingPage() {
           <Card.Title>How to use this arch repo</Card.Title>
           <p>
             If you want to install packages from this repository just add the following lines to the bottom of your pacman.conf file
-            (probably located here <code>/etc/pacman.conf</code>).
+            (located here <code>/etc/pacman.conf</code>).
           </p>
           <TextAreaCopyable
-            text={'[tereius_priv]\nSigLevel = Optional TrustAll\nServer = ' + window.location.href + 'arch-repo/x86_64/'}
+            text={'[' + repoName + ']\nSigLevel = Optional TrustAll\nServer = ' + window.location.href + repoPathPart}
           ></TextAreaCopyable>
           <br />
           <p>Then just run</p>

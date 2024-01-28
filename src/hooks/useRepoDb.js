@@ -7,10 +7,11 @@ import { singletonHook } from 'react-singleton-hook';
 const init = new Map();
 
 function useRepoDbImpl() {
+
   const [packages, setPackages] = useState(init);
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_ARCH_REPO_PATH)
+    fetch(repoPath)
       .then(res => res.arrayBuffer())
       //.then(x => new Promise(resolve => setTimeout(() => resolve(x), 1000)))
       .then(buff => {
@@ -26,7 +27,7 @@ function useRepoDbImpl() {
       })
       .then(extractedFiles => {
         // onSuccess
-        console.info('finished');
+        console.info('finished loading repo');
         const p = new Map(
           extractedFiles
             .filter(file => file.name.endsWith('desc'))
@@ -38,11 +39,14 @@ function useRepoDbImpl() {
         setPackages(p);
       })
       .catch(err => {
-        console.warn('errrrr ' + err.message);
+        console.warn(err.message);
       });
   }, []);
 
   return packages;
 }
 
+export const repoPath = process.env.REACT_APP_ARCH_REPO_PATH ? process.env.REACT_APP_ARCH_REPO_PATH : "core.db.tar.gz"
+export const repoPathPart = repoPath.split('/').slice(0, -1).join('/')
+export const repoName = repoPath.split('/').slice(-1).join('').split('.')[0]
 export const useRepoDb = singletonHook(init, useRepoDbImpl);

@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-public/community.db.tar.gz
+public/*.db.tar.gz
 
 # dependencies
 /node_modules

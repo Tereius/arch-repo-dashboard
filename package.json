@@ -1,6 +1,6 @@
 {
   "name": "arch-repo-dashboard",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
@@ -22,6 +22,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "data": "curl https://mirror.rackspace.com/archlinux/core/os/x86_64/core.db.tar.gz --output public/core.db.tar.gz",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
