@@ -12,6 +12,8 @@ export function PackagePage() {
   let params = useParams();
   const data = useRepoDb();
 
+  const host = new URL(window.location.href).host
+
   const [item, setItem] = useState();
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export function PackagePage() {
                 <p className="card-text">{item.desc}</p>
               </Col>
               <Col sm={4}>
-                <a href={repoPathPart + "/" + item.filename} download>
+                <a href={"//" + host + "/" + repoPathPart + "/" + item.filename} download>
                   Download
                 </a>
               </Col>
