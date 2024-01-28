@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import { useParams, Link } from 'react-router-dom';
-import { useRepoDb } from '../hooks/useRepoDb';
+import { useRepoDb, repoPathPart } from '../hooks/useRepoDb';
 import { VersionBadge } from '../VersionBadge/VersionBadge';
 import { TextAreaCopyable } from '../TextAreaCopyable/TextAreaCopyable';
 import Container from 'react-bootstrap/Container';
@@ -51,7 +51,7 @@ export function PackagePage() {
                 <p className="card-text">{item.desc}</p>
               </Col>
               <Col sm={4}>
-                <a href={'/' + item.filename} download>
+                <a href={repoPathPart + "/" + item.filename} download>
                   Download
                 </a>
               </Col>

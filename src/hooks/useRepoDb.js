@@ -47,6 +47,6 @@ function useRepoDbImpl() {
 }
 
 export const repoPath = process.env.REACT_APP_ARCH_REPO_PATH ? process.env.REACT_APP_ARCH_REPO_PATH : "core.db.tar.gz"
-export const repoPathPart = repoPath.split('/').slice(0, -1).join('/')
+export const repoPathPart = repoPath.split('/').slice(0, -1).join('/') // Does not end with /
 export const repoName = repoPath.split('/').slice(-1).join('').split('.')[0]
 export const useRepoDb = singletonHook(init, useRepoDbImpl);
