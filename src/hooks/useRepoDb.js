@@ -10,7 +10,7 @@ function useRepoDbImpl() {
   const [packages, setPackages] = useState(init);
 
   useEffect(() => {
-    fetch('/community.db.tar.gz')
+    fetch(process.env.REACT_APP_ARCH_REPO_PATH)
       .then(res => res.arrayBuffer())
       //.then(x => new Promise(resolve => setTimeout(() => resolve(x), 1000)))
       .then(buff => {

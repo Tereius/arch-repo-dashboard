@@ -60,8 +60,7 @@ export function Search() {
       <Dropdown autoClose="true" focusFirstItemOnShow="keyboard" onSelect={onSelected} onToggle={onToggle} show={show}>
         <Dropdown.Toggle as={'Form'} split={true} bsPrefix="ignore">
           <InputGroup
-            hasValidation
-            className="me-2"
+            //className="mb-3"
             onFocus={onFocus}
             onBlur={onBlur}
             placeholder="Search"
@@ -69,10 +68,8 @@ export function Search() {
             onChange={event => setSearchText(event.target.value)}
             ref={inputRef}
           >
-            <FormControl type="text" placeholder="Search packages" required isInvalid />
-            <span className="input-group-addon">
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </span>
+            <Form.Control type="text" placeholder="Search packages" />
+            <InputGroup.Text><FontAwesomeIcon icon={faMagnifyingGlass} /></InputGroup.Text>
           </InputGroup>
         </Dropdown.Toggle>
         <Dropdown.Menu>
